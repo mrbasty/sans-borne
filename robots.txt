@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sans-borne.vercel.app/sitemap.xml

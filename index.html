@@ -3,12 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sans Borne — le comparateur des vélos électriques en libre-service à Paris</title>
-  <meta name="description" content="Sans Borne compare les forfaits Lime, Dott et Voi à Paris selon votre fréquence et la durée réelle de vos trajets, calcul détaillé à l'appui.">
+
+  <title>Sans Borne — comparateur vélos en libre-service à Paris (Lime, Dott, Voi)</title>
+  <meta name="description" content="Comparez les tarifs Lime, Dott et Voi à Paris selon votre usage réel. Sans Borne classe tous les forfaits du moins cher au plus cher et détaille chaque calcul.">
+  <link rel="canonical" href="https://sans-borne.vercel.app/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b0c0e">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sans Borne">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://sans-borne.vercel.app/">
+  <meta property="og:title" content="Sans Borne — comparateur vélos en libre-service à Paris">
+  <meta property="og:description" content="Comparez Lime, Dott et Voi selon votre usage réel. Le classement des forfaits, du moins cher au plus cher, calcul à l'appui.">
+  <meta property="og:image" content="https://sans-borne.vercel.app/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sans Borne, comparateur des vélos en libre-service à Paris">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sans Borne — comparateur vélos en libre-service à Paris">
+  <meta name="twitter:description" content="Comparez Lime, Dott et Voi selon votre usage réel, calcul à l'appui.">
+  <meta name="twitter:image" content="https://sans-borne.vercel.app/og.png">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Sans Borne",
+    "url": "https://sans-borne.vercel.app/",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "fr-FR",
+    "description": "Comparateur des forfaits de vélos électriques en libre-service à Paris : Lime, Dott et Voi, classés selon votre usage réel.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "about": [
+      { "@type": "Brand", "name": "Lime" },
+      { "@type": "Brand", "name": "Dott" },
+      { "@type": "Brand", "name": "Voi" }
+    ],
+    "areaServed": { "@type": "City", "name": "Paris" }
+  }
+  </script>
 </head>
 <body>
 
@@ -33,6 +79,7 @@
     <a href="#usage">Votre usage</a>
     <a href="#classement">Classement</a>
     <a href="#tarifs">Tarifs</a>
+    <a href="#faq">FAQ</a>
   </nav>
 </header>
 
@@ -108,6 +155,67 @@
     <div id="grid" class="ops"></div>
   </section>
 
+  <section id="faq" class="section" aria-labelledby="faq-title">
+    <div class="section__head">
+      <h2 id="faq-title">Questions fréquentes</h2>
+      <p>Le comparatif Lime, Dott et Voi en clair.</p>
+    </div>
+
+    <div class="faq">
+      <details class="qa">
+        <summary>Quel vélo en libre-service est le moins cher à Paris ?</summary>
+        <div class="qa__body">
+          <p>Cela dépend de votre usage. À la minute, <strong>Lime est le moins cher</strong>
+          (0,28 €/min sans déverrouillage), juste devant Voi (0,29 €/min sans déverrouillage) ;
+          Dott est le plus cher à l'unité (1 € de déverrouillage + 0,35 €/min). Mais dès qu'on
+          roule régulièrement, un pass de minutes revient toujours moins cher : le
+          <strong>pass 400 min de Voi à 31,99 €</strong> ou celui de Dott à 37,99 € (valable
+          90 jours) offrent le meilleur coût au trajet.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Lime, Dott ou Voi : lequel choisir ?</summary>
+        <div class="qa__body">
+          <p>Pour des trajets courts et occasionnels, Lime et Dott dominent grâce à leurs pass de
+          minutes longue durée. Pour un usage régulier de type domicile-travail, Voi prend souvent
+          la tête avec son pass 400 min. Pour un usage intensif avec des trajets d'environ 30 min,
+          les abonnements à prix fixe par trajet (Dott Pro à 1,35 € le trajet, LimePrime à 1,50 €)
+          deviennent imbattables car le prix ne dépend plus de la durée. Réglez votre fréquence et
+          la durée de vos trajets en haut de page pour voir le classement adapté à votre cas.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Vaut-il mieux payer à la minute ou prendre un abonnement ?</summary>
+        <div class="qa__body">
+          <p>Un pass ou un abonnement est presque toujours rentable dès deux ou trois trajets par
+          semaine. Exemple : un pass 30 min à 3,99 € couvre deux courses de 12 minutes pour moins
+          cher qu'une seule payée à la minute. Le tarif à la minute ne reste intéressant que pour
+          un trajet vraiment isolé.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Les tarifs incluent-ils le déverrouillage&nbsp;?</summary>
+        <div class="qa__body">
+          <p>À la minute, seul Dott facture un déverrouillage (1 €) ; Lime et Voi sont à 0 €.
+          <strong>Tous les pass de minutes des trois opérateurs incluent le déverrouillage</strong>,
+          quel que soit le nombre de trajets.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Sans Borne est-il affilié à Lime, Dott ou Voi ?</summary>
+        <div class="qa__body">
+          <p>Non. Sans Borne est un comparateur indépendant des trois opérateurs. Les tarifs sont
+          relevés directement dans les applications, pour Paris, et mis à jour manuellement. Les
+          grilles évoluant souvent, vérifiez le prix dans l'application avant de souscrire.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
 </main>
 
 <footer class="foot">
@@ -122,6 +230,55 @@
     Marques et logos appartiennent à leurs propriétaires respectifs.
   </p>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quel vélo en libre-service est le moins cher à Paris ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cela dépend de l'usage. À la minute, Lime est le moins cher (0,28 €/min sans déverrouillage), devant Voi (0,29 €/min) ; Dott est le plus cher à l'unité (1 € + 0,35 €/min). Dès qu'on roule régulièrement, un pass de minutes revient moins cher : le pass 400 min de Voi à 31,99 € ou celui de Dott à 37,99 € valable 90 jours offrent le meilleur coût au trajet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lime, Dott ou Voi : lequel choisir ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour des trajets courts et occasionnels, Lime et Dott dominent grâce à leurs pass longue durée. Pour un usage régulier domicile-travail, Voi prend souvent la tête avec son pass 400 min. Pour un usage intensif de trajets d'environ 30 minutes, les abonnements à prix fixe par trajet (Dott Pro à 1,35 €, LimePrime à 1,50 €) deviennent imbattables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vaut-il mieux payer à la minute ou prendre un abonnement ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un pass est presque toujours rentable dès deux ou trois trajets par semaine. Un pass 30 min à 3,99 € couvre deux courses de 12 minutes pour moins cher qu'une seule payée à la minute. Le tarif à la minute ne reste intéressant que pour un trajet isolé."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Les tarifs incluent-ils le déverrouillage ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "À la minute, seul Dott facture un déverrouillage (1 €) ; Lime et Voi sont à 0 €. Tous les pass de minutes des trois opérateurs incluent le déverrouillage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Sans Borne est-il affilié à Lime, Dott ou Voi ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Sans Borne est un comparateur indépendant. Les tarifs sont relevés dans les applications, pour Paris, et mis à jour manuellement. Vérifiez le prix dans l'application avant de souscrire."
+      }
+    }
+  ]
+}
+</script>
 
 <script src="data.js"></script>
 <script src="app.js"></script>

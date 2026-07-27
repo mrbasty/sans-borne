@@ -729,6 +729,58 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
   white-space: nowrap;
 }
 
+/* ------------------------------- FAQ ------------------------------ */
+
+.faq {
+  border-top: 1px solid var(--line);
+}
+
+.qa {
+  border-bottom: 1px solid var(--line);
+}
+
+.qa summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 4px;
+  list-style: none;
+  cursor: pointer;
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 500;
+  transition: color var(--t);
+}
+
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary:hover { color: var(--text); }
+
+.qa summary::after {
+  content: "";
+  flex: none;
+  margin-left: auto;
+  width: 9px;
+  height: 9px;
+  border-right: 1.5px solid var(--text-3);
+  border-bottom: 1.5px solid var(--text-3);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform var(--t);
+}
+
+.qa[open] summary::after { transform: rotate(225deg) translate(-1px, -1px); }
+
+.qa__body {
+  padding: 0 4px 20px;
+  animation: rise 0.35s var(--ease);
+}
+
+.qa__body p {
+  margin: 0;
+  max-width: 72ch;
+  color: var(--text-2);
+}
+
+.qa__body strong { color: var(--text); font-weight: 500; }
+
 /* ----------------------------- Footer ----------------------------- */
 
 .foot {
