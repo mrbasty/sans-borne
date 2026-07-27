@@ -277,25 +277,6 @@ function renderRanking(rows) {
     .join("");
 }
 
-/* ------------------------------ Podium ---------------------------- */
-
-/**
- * Illustration du hero : trois marches qui montent et descendent en boucle,
- * décalées pour former une vague. Purement décoratif — aucune donnée n'y est
- * représentée, l'animation vit entièrement en CSS.
- */
-function buildPodium() {
-  els.podium.innerHTML = OPERATORS.map(
-    (op, i) => `
-    <div class="col" style="--brand:${op.color}; --i:${i}">
-      <span class="col__bar"></span>
-      <span class="col__cap">
-        <img src="logos/Logo-${op.file}.png" alt="" width="44" height="44">
-      </span>
-    </div>`
-  ).join("");
-}
-
 function renderGrid() {
   els.grid.innerHTML = OPERATORS.map(
     (op) => `
@@ -393,16 +374,69 @@ function bind() {
   els.duration.addEventListener("input", readControls);
 }
 
-for (const id of ["presets", "filters", "trips", "duration", "verdict", "ranking", "grid", "podium"]) {
+/**
+ * Easter egg : au survol OU au clic sur le cluster de logos du hero, les trois
+ * se réordonnent aléatoirement avec la même micro-animation — ils partent de
+ * leur ancienne place, s'écartent et grossissent, puis se recomposent dans le
+ * nouvel ordre. Chaque emplacement garde sa rotation (éventail) ; ce sont les
+ * logos qui changent de slot.
+ */
+function initLogoPlay() {
+  const cluster = document.querySelector(".hero__logos");
+  if (!cluster) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const SPREAD = [-0.6, 0, 0.6]; // écartement par slot : gauche, centre, droite
+  const DURATION = 950; // ms — l'animation, et la durée du verrou
+  let busy = false; // ignore survol/clic tant que l'animation tourne
+
+  const play = () => {
+    if (busy) return;
+    const imgs = [...cluster.children];
+    if (imgs.length < 2) return;
+
+    busy = true;
+    setTimeout(() => (busy = false), DURATION);
+
+    // Positions de départ (FLIP).
+    const firstLeft = new Map(imgs.map((el) => [el, el.getBoundingClientRect().left]));
+
+    // Nouvel ordre aléatoire, toujours différent de l'actuel.
+    let order = imgs;
+    do {
+      order = [...imgs].sort(() => Math.random() - 0.5);
+    } while (order.every((el, i) => el === imgs[i]));
+    order.forEach((el) => cluster.appendChild(el));
+
+    if (reduce.matches) return; // réordonne sans animer si mouvement réduit
+
+    const em = parseFloat(getComputedStyle(cluster).fontSize);
+    order.forEach((el, i) => {
+      el.getAnimations().forEach((a) => a.cancel());
+      const dx = firstLeft.get(el) - el.getBoundingClientRect().left;
+      const rest = getComputedStyle(el).transform; // rotation du nouveau slot
+      const base = rest === "none" ? "" : rest;
+      el.animate(
+        [
+          { transform: `translateX(${dx}px) scale(1) ${base}` },
+          { transform: `translateX(${SPREAD[i] * em}px) scale(1.2) ${base}`, offset: 0.5 },
+          { transform: `translateX(0px) scale(1) ${base}` },
+        ],
+        { duration: DURATION, easing: "cubic-bezier(0.34, 1.3, 0.5, 1)" }
+      );
+    });
+  };
+
+  cluster.addEventListener("click", play);
+  cluster.addEventListener("mouseenter", play);
+}
+
+for (const id of ["presets", "filters", "trips", "duration", "verdict", "ranking", "grid"]) {
   els[id] = document.getElementById(id);
 }
 els.tripsOut = document.getElementById("trips-out");
 els.durationOut = document.getElementById("duration-out");
 
-document.getElementById("stamp").textContent =
-  `${OPERATORS.reduce((n, op) => n + op.plans.length, 0)} offres relevées dans les applications le 21 juillet 2026`;
-
 bind();
-buildPodium();
+initLogoPlay();
 renderGrid();
 readControls();

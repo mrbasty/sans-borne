@@ -154,126 +154,79 @@ main {
 
 .hero {
   width: 100%;
-  max-width: var(--shell);
+  max-width: 1040px;
   margin: 0 auto;
-  padding: clamp(44px, 8vw, 92px) var(--gutter) clamp(44px, 7vw, 76px);
-  display: grid;
-  gap: clamp(32px, 5vw, 64px);
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  align-items: end;
+  padding: clamp(52px, 9vw, 116px) var(--gutter) clamp(48px, 7vw, 84px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.hero h1 {
-  margin: 18px 0 0;
-  max-width: 15ch;
-  font-size: clamp(32px, 4.6vw, 50px);
+.hero .eyebrow { margin-bottom: 22px; }
+
+.hero__title {
+  margin: 0;
+  max-width: 24ch;
+  font-size: clamp(31px, 4.4vw, 54px);
   font-weight: 600;
+  line-height: 1.08;
 }
 
-.hero h1 em {
-  font-style: normal;
-  color: var(--text-3);
+/* Cluster de logos empilés, inline dans le titre, calé sur la casse. */
+.hero__logos {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0 0.16em;
+  transform: translateY(-0.06em);
+  cursor: pointer;
+}
+
+.hero__logos img {
+  width: 0.94em;
+  height: 0.94em;
+  border-radius: 0.26em;
+  margin-left: -0.2em;
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.7);
+  /* Repos : léger éventail (desktop). --spread pilote l'écartement au survol. */
+  transform: rotate(var(--rot, 0deg));
+}
+
+.hero__logos img:first-child { margin-left: 0; }
+
+/* Éventail de repos, desktop uniquement. Le survol/clic (écartement +
+   grossissement + réordonnancement) est piloté en JS — voir initLogoPlay. */
+@media (min-width: 701px) {
+  .hero__logos img:nth-child(1) { --rot: -5deg; }
+  .hero__logos img:nth-child(2) { --rot:  5deg; }
+  .hero__logos img:nth-child(3) { --rot: -5deg; }
 }
 
 .lede {
-  margin: 22px 0 0;
-  max-width: 46ch;
+  margin: 22px auto 0;
+  max-width: 52ch;
   color: var(--text-2);
 }
 
-.hero__aside {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 4px;
+/* CTA en pilule, retour tactile physique au clic. */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: var(--text);
+  color: #0b0c0e;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.16s var(--ease), box-shadow var(--t);
 }
 
-.hero__stamp {
-  margin: 26px 0 0;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  max-width: 46ch;
-  font-size: 13px;
-  color: var(--text-3);
-}
-
-/* --- Podium : illustration en boucle, sans donnée ---
-   Les marches montent et descendent, décalées d'un tiers de cycle pour
-   former une vague. Marche et logo partagent les mêmes valeurs (--low,
-   --high) afin de rester solidaires. Uniquement des `transform`. --- */
-
-.podium {
-  --track: 172px;
-  --dur: 7.8s;
-  --low: 0.42;
-  --high: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-  padding-top: 40px;
-  border-bottom: 1px solid var(--line);
-}
-
-.col {
-  position: relative;
-  height: var(--track);
-  padding: 0 9px;
-}
-
-.col__bar,
-.col__cap {
-  position: absolute;
-  bottom: 0;
-  animation-duration: var(--dur);
-  animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
-  animation-iteration-count: infinite;
-  animation-delay: calc(var(--i) * var(--dur) / -3);
-}
-
-.col__bar {
-  left: 9px;
-  right: 9px;
-  height: 100%;
-  border-radius: 4px 4px 0 0;
-  border-top: 2px solid var(--brand);
-  background: linear-gradient(
-    to bottom,
-    color-mix(in srgb, var(--brand) 24%, transparent),
-    color-mix(in srgb, var(--brand) 2%, transparent)
-  );
-  transform-origin: bottom;
-  animation-name: step;
-}
-
-@keyframes step {
-  0%, 100% { transform: scaleY(var(--low)); }
-  50%      { transform: scaleY(var(--high)); }
-}
-
-.col__cap {
-  left: 50%;
-  margin-left: -22px;
-  animation-name: lift;
-}
-
-@keyframes lift {
-  0%, 100% { transform: translateY(calc(var(--track) * var(--low) * -1)); }
-  50%      { transform: translateY(calc(var(--track) * var(--high) * -1)); }
-}
-
-.col__cap img {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-  box-shadow: 0 14px 22px -12px color-mix(in srgb, var(--brand) 30%, #000);
-}
-
-/* Animations coupées : les marches gardent une hauteur lisible et étagée. */
-@media (prefers-reduced-motion: reduce) {
-  .col__bar { transform: scaleY(calc(var(--low) + var(--i) * 0.24)); }
-  .col__cap { transform: translateY(calc(var(--track) * (var(--low) + var(--i) * 0.24) * -1)); }
-}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -12px rgba(0, 0, 0, 0.9); }
+.cta:active { transform: translateY(0) scale(0.98); }
 
 /* ---------------------------- Sections ---------------------------- */
 
@@ -918,9 +871,6 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 /* ---------------------------- Responsive -------------------------- */
 
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; align-items: start; }
-  .hero__aside { padding-bottom: 0; }
-  .podium { --track: 140px; max-width: 300px; }
   .verdict { grid-template-columns: 1fr; }
 }
 
@@ -933,7 +883,6 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 }
 
 @media (max-width: 620px) {
-  .hero h1 br { display: none; }
   .rank summary {
     grid-template-columns: 20px 26px minmax(0, 1fr) auto 12px;
     gap: 11px;
