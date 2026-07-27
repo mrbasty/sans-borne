@@ -784,34 +784,116 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 /* ----------------------------- Footer ----------------------------- */
 
 .foot {
+  margin-top: clamp(72px, 12vw, 140px);
+  padding-top: clamp(40px, 6vw, 72px);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.foot__top,
+.foot__bottom {
   width: 100%;
   max-width: var(--shell);
-  margin: clamp(56px, 9vw, 96px) auto 0;
-  padding: 28px var(--gutter) 56px;
-  border-top: 1px solid var(--line);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.foot__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 28px 48px;
+}
+
+.foot__note {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.foot__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  align-content: flex-start;
+}
+
+.foot__nav a {
+  font-size: 14px;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+.foot__nav a:hover { color: var(--text); }
+
+/* Wordmark géant en pleine largeur. Dégradé vertical + fondu latéral :
+   présent mais jamais criard sur le fond sombre. */
+.foot__wordmark {
+  margin: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 32px);
+  text-align: center;
+  line-height: 0.82;
+  overflow: hidden;
+}
+
+.foot__wordmark span {
+  display: block;
+  font-size: 18.2vw;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #2b2f39 0%, #16181d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  user-select: none;
+}
+
+.foot__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding-bottom: 40px;
   font-size: 13px;
   color: var(--text-3);
 }
 
-.foot p { margin: 0; max-width: 76ch; }
+.foot__bottom p { margin: 0; }
 
-.foot__brand {
-  margin-bottom: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+.foot__credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.foot__credit .heart {
+  width: 13px;
+  height: 13px;
+  fill: #F26961;
+  animation: beat 1.6s var(--ease) infinite;
+}
+
+@keyframes beat {
+  0%, 70%, 100% { transform: scale(1); }
+  20%           { transform: scale(1.28); }
+  40%           { transform: scale(1.06); }
+}
+
+.foot__credit a {
   color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 1px;
+  transition: color var(--t), border-color var(--t);
 }
 
-.foot__meta { margin-top: 8px; }
-
-.foot code {
-  padding: 1px 6px;
-  border-radius: 5px;
-  background: var(--surface-2);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 12px;
-}
+.foot__credit a:hover { color: var(--text); border-color: var(--text); }
 
 /* ------------------------- Accessibilité -------------------------- */
 
