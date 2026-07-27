@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sans Borne — le comparateur des vélos électriques en libre-service à Paris</title>
+  <meta name="description" content="Sans Borne compare les forfaits Lime, Dott et Voi à Paris selon votre fréquence et la durée réelle de vos trajets, calcul détaillé à l'appui.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <a class="brand" href="#top">
+    <!-- La marque : une roue en trois arcs, un par opérateur, séparés par des
+         ruptures — le vélo qui ne s'attache à aucune borne. -->
+    <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
+      <g fill="none" stroke-width="2.6" stroke-linecap="round">
+        <circle cx="14" cy="14" r="10" stroke="#00DD00" stroke-dasharray="15.9 46.9" transform="rotate(-84 14 14)"/>
+        <circle cx="14" cy="14" r="10" stroke="#00A8E9" stroke-dasharray="15.9 46.9" transform="rotate(36 14 14)"/>
+        <circle cx="14" cy="14" r="10" stroke="#F26961" stroke-dasharray="15.9 46.9" transform="rotate(156 14 14)"/>
+      </g>
+      <circle cx="14" cy="14" r="2.4" fill="currentColor"/>
+    </svg>
+    <span class="brand__name">Sans Borne</span>
+  </a>
+
+  <nav class="nav" aria-label="Sections">
+    <a href="#usage">Votre usage</a>
+    <a href="#classement">Classement</a>
+    <a href="#tarifs">Tarifs</a>
+  </nav>
+</header>
+
+<header id="top" class="hero">
+  <div class="hero__text">
+    <p class="eyebrow">Lime &middot; Dott &middot; Voi</p>
+    <h1>Le comparateur des vélos électriques <em>en libre-service</em> à Paris.</h1>
+    <p class="lede">
+      Trois opérateurs, toutes leurs offres, ramenées à un coût mensuel comparable.
+      Réglez votre usage réel : Sans Borne classe les forfaits et montre le calcul.
+    </p>
+    <p id="stamp" class="hero__stamp"></p>
+  </div>
+  <aside class="hero__aside">
+    <!-- Illustration seule : aucune donnée, une boucle décorative. -->
+    <div id="podium" class="podium" aria-hidden="true"></div>
+  </aside>
+</header>
+
+<main>
+
+  <section id="usage" class="section" aria-labelledby="usage-title">
+    <div class="section__head">
+      <h2 id="usage-title">Votre usage</h2>
+      <p>Partez d'un profil type, puis ajustez.</p>
+    </div>
+
+    <div class="controls">
+      <div id="presets" class="presets" role="group" aria-label="Profils types"></div>
+
+      <div class="sliders">
+        <div class="field">
+          <label for="trips">Fréquence</label>
+          <input type="range" id="trips" min="1" max="25" step="1" value="6"
+                 aria-describedby="trips-out">
+          <output id="trips-out" for="trips"></output>
+        </div>
+        <div class="field">
+          <label for="duration">Durée moyenne d'un trajet</label>
+          <input type="range" id="duration" min="3" max="45" step="1" value="12"
+                 aria-describedby="duration-out">
+          <output id="duration-out" for="duration"></output>
+        </div>
+      </div>
+
+      <fieldset class="filters-wrap">
+        <legend>Opérateurs comparés</legend>
+        <div id="filters" class="filters"></div>
+      </fieldset>
+    </div>
+  </section>
+
+  <section id="verdict" class="verdict" aria-live="polite" aria-label="Résultat"></section>
+
+  <section id="classement" class="section" aria-labelledby="ranking-title">
+    <div class="section__head">
+      <h2 id="ranking-title">Tous les forfaits</h2>
+      <p>Du moins cher au plus cher. Dépliez une ligne pour voir le calcul.</p>
+    </div>
+    <ol id="ranking" class="ranking"></ol>
+    <p class="fineprint">
+      Coût estimé sur 30 jours. Un pass n'est acheté que s'il est réellement consommable dans sa
+      fenêtre de validité, et les pass de plus d'un mois sont lissés sur leur durée. Les
+      dépassements retombent au tarif à la minute de l'opérateur.
+    </p>
+  </section>
+
+  <section id="tarifs" class="section" aria-labelledby="grids-title">
+    <div class="section__head">
+      <h2 id="grids-title">Grilles tarifaires</h2>
+      <p>Ce que proposent les trois applications, sans interprétation.</p>
+    </div>
+    <div id="grid" class="ops"></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot__brand">Sans Borne</p>
+  <p>
+    Tarifs Voi, Dott et Lime relevés dans les applications le 21/07/2026, pour Paris.
+    Tous les pass incluent le déverrouillage. Les grilles évoluent souvent&nbsp;:
+    vérifiez dans l'application avant de souscrire.
+  </p>
+  <p class="foot__meta">
+    Sans Borne est indépendant des trois opérateurs. Données modifiables dans <code>data.js</code>.
+    Marques et logos appartiennent à leurs propriétaires respectifs.
+  </p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

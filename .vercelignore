@@ -1,0 +1,3 @@
+# Outillage local uniquement — Vercel sert le site en statique.
+server.mjs
+.claude/

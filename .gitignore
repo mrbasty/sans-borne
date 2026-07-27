@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Dépendances (aucune ici, mais par sécurité)
+node_modules/
+
+# Vercel
+.vercel/
+
+# Éditeurs / logs
+*.log
+.idea/
+.vscode/
+
+# Outillage local Claude Code
+.claude/
