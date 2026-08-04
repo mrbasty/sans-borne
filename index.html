@@ -90,13 +90,25 @@
 </header>
 
 <header id="top" class="hero">
-  <p class="eyebrow">Paris &middot; vélos électriques en libre-service</p>
-  <h1 class="hero__title">Trouvez le vélo électrique <span class="hero__logos" aria-hidden="true"><img src="logos/Logo-Lime.png" alt="" width="60" height="60"><img src="logos/Logo-Dott.png" alt="" width="60" height="60"><img src="logos/Logo-Voi.png" alt="" width="60" height="60"></span><br>le plus rentable pour vos trajets parisiens.</h1>
-  <p class="lede">
-    Comparez les abonnements Lime, Dott et Voi selon votre utilisation réelle.
-    En quelques secondes, trouvez l'offre la moins chère.
-  </p>
-  <a class="cta" href="#usage">Comparer les offres</a>
+  <!-- Auras de couleur en fond, dérive lente + réaction à la souris (initAura). -->
+  <div class="aura" aria-hidden="true">
+    <span class="blob" style="--c:#00DD00"></span>
+    <span class="blob" style="--c:#00A8E9"></span>
+    <span class="blob" style="--c:#F26961"></span>
+  </div>
+
+  <div class="hero__inner">
+    <p class="eyebrow">Paris &middot; vélos électriques en libre-service</p>
+
+    <!-- Cluster de logos affiché seul, sous le sur-titre (mobile). -->
+    <span class="hero__logos hero__logos--stack" aria-hidden="true"><img src="logos/Logo-Lime.png" alt="" width="60" height="60"><img src="logos/Logo-Dott.png" alt="" width="60" height="60"><img src="logos/Logo-Voi.png" alt="" width="60" height="60"></span>
+    <h1 class="hero__title">Trouvez le vélo électrique <span class="hero__logos hero__logos--inline" aria-hidden="true"><img src="logos/Logo-Lime.png" alt="" width="60" height="60"><img src="logos/Logo-Dott.png" alt="" width="60" height="60"><img src="logos/Logo-Voi.png" alt="" width="60" height="60"></span><br>le plus rentable pour vos trajets parisiens.</h1>
+    <p class="lede">
+      Comparez les abonnements Lime, Dott et Voi selon votre utilisation réelle.
+      En quelques secondes, trouvez l'offre la moins chère.
+    </p>
+    <a class="cta" href="#usage">Comparer les offres</a>
+  </div>
 </header>
 
 <main>

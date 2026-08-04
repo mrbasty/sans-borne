@@ -395,8 +395,12 @@ function bind() {
  * logos qui changent de slot.
  */
 function initLogoPlay() {
-  const cluster = document.querySelector(".hero__logos");
-  if (!cluster) return;
+  // Deux clusters possibles : inline (desktop) et empilé (mobile). Chacun a
+  // sa propre logique ; seul le visible reçoit survol/clic.
+  document.querySelectorAll(".hero__logos").forEach(setupLogoCluster);
+}
+
+function setupLogoCluster(cluster) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const SPREAD = [-0.6, 0, 0.6]; // écartement par slot : gauche, centre, droite
   const DURATION = 950; // ms — l'animation, et la durée du verrou
@@ -443,6 +447,66 @@ function initLogoPlay() {
   cluster.addEventListener("mouseenter", play);
 }
 
+/**
+ * Auras de couleur en fond du hero : chaque tache dérive lentement vers des
+ * cibles aléatoires (mouvement fluide et jamais répétitif) et se décale
+ * légèrement selon la position de la souris. Uniquement des `transform`.
+ * En pause quand le hero sort de l'écran ; figé si mouvement réduit.
+ */
+function initAura() {
+  const hero = document.getElementById("top");
+  const aura = hero?.querySelector(".aura");
+  if (!aura) return;
+
+  const blobs = [...aura.querySelectorAll(".blob")].map((el, i) => ({
+    el,
+    x: Math.random(), y: Math.random(),      // position courante (0–1 du hero)
+    tx: Math.random(), ty: Math.random(),    // cible courante
+    ease: 0.006 + Math.random() * 0.004,     // lenteur de la dérive
+    depth: 4 + i * 3,                         // amplitude du décalage souris (%)
+  }));
+
+  let mx = 0, my = 0;      // souris, décalage depuis le centre (−1 … 1)
+  let dmx = 0, dmy = 0;    // version lissée
+  hero.addEventListener("pointermove", (e) => {
+    const r = hero.getBoundingClientRect();
+    mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+  });
+  hero.addEventListener("pointerleave", () => { mx = 0; my = 0; });
+
+  const place = (b) => {
+    const px = (b.x - 0.5) * 100 + dmx * b.depth;
+    const py = (b.y - 0.5) * 100 + dmy * b.depth;
+    b.el.style.transform = `translate3d(${px}%, ${py}%, 0)`;
+  };
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reduce.matches) { blobs.forEach(place); return; }
+
+  let raf = 0;
+  const tick = () => {
+    dmx += (mx - dmx) * 0.05;
+    dmy += (my - dmy) * 0.05;
+    for (const b of blobs) {
+      b.x += (b.tx - b.x) * b.ease;
+      b.y += (b.ty - b.y) * b.ease;
+      if (Math.hypot(b.tx - b.x, b.ty - b.y) < 0.02) {
+        b.tx = Math.random();
+        b.ty = Math.random();
+      }
+      place(b);
+    }
+    raf = requestAnimationFrame(tick);
+  };
+
+  // Ne tourne que lorsque le hero est visible.
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !raf) raf = requestAnimationFrame(tick);
+    else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+  }).observe(hero);
+}
+
 for (const id of ["presets", "filters", "trips", "duration", "verdict", "ranking", "grid"]) {
   els[id] = document.getElementById(id);
 }
@@ -451,5 +515,6 @@ els.durationOut = document.getElementById("duration-out");
 
 bind();
 initLogoPlay();
+initAura();
 renderGrid();
 readControls();
