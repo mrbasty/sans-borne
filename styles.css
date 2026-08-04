@@ -247,15 +247,16 @@ main {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  padding: clamp(20px, 3vw, 30px);
+  padding: clamp(20px, 2.2vw, 26px);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 22px;
 }
 
+/* En demi-colonne, les 4 profils tiennent en 2 × 2. */
 .presets {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
@@ -297,11 +298,11 @@ main {
 
 .sliders {
   display: grid;
-  gap: 26px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.field { display: flex; flex-direction: column; gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
 
 .field label { font-size: 13px; color: var(--text-3); }
 
@@ -345,14 +346,14 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 
 .filters-wrap {
   margin: 0;
-  padding: 22px 0 0;
+  padding: 18px 0 0;
   border: none;
   border-top: 1px solid var(--line);
 }
 
 .filters-wrap legend { padding: 0; font-size: 13px; color: var(--text-3); }
 
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
 .chip {
   display: inline-flex;
@@ -373,19 +374,31 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 .chip:has(input:checked) { border-color: var(--brand); }
 .chip:has(input:not(:checked)) { opacity: 0.45; }
 
+/* ---------------------------- Établi 50/50 ------------------------ */
+/* Réglages à gauche, résultat à droite : les deux tiennent côte à côte
+   au lieu de s'empiler, ce qui réduit fortement la hauteur totale. */
+
+.workbench {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(18px, 2.2vw, 28px);
+  align-items: start;
+}
+
 /* ----------------------------- Verdict ---------------------------- */
 
+/* En demi-colonne, le verdict s'empile : carte principale puis récap. */
 .verdict {
   display: grid;
-  gap: 16px;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 14px;
+  grid-template-columns: 1fr;
   align-items: stretch;
 }
 
 .verdict__main {
   position: relative;
   overflow: hidden;
-  padding: clamp(24px, 3.4vw, 38px);
+  padding: clamp(22px, 2.4vw, 28px);
   border: 1px solid color-mix(in srgb, var(--brand) 34%, var(--line));
   border-radius: var(--r-lg);
   background:
@@ -396,15 +409,15 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 .verdict__head {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin: 16px 0 0;
+  gap: 12px;
+  margin: 12px 0 0;
 }
 
-.verdict__head h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 600; }
-.verdict__head h2 span { color: var(--text-2); font-weight: 400; }
+.verdict__head h3 { font-size: clamp(19px, 2.1vw, 24px); font-weight: 600; }
+.verdict__head h3 span { color: var(--text-2); font-weight: 400; }
 
 .verdict__price {
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   display: flex;
   align-items: baseline;
   gap: 10px;
@@ -412,7 +425,7 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 
 .amount {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: clamp(38px, 6vw, 54px);
+  font-size: clamp(34px, 3.6vw, 44px);
   font-weight: 600;
   letter-spacing: -0.035em;
 }
@@ -420,12 +433,12 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 .unit { color: var(--text-3); font-size: 15px; }
 
 .stats {
-  margin: 26px 0 0;
-  padding-top: 20px;
+  margin: 18px 0 0;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
   display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
 }
 
 .stats div { display: flex; flex-direction: column; gap: 3px; }
@@ -441,8 +454,8 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 .stats .pos { color: var(--pos); }
 
 .callout {
-  margin: 20px 0 0;
-  padding: 11px 14px;
+  margin: 16px 0 0;
+  padding: 10px 13px;
   border-left: 2px solid var(--brand);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
   background: var(--surface-2);
@@ -453,8 +466,8 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 .verdict__side {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: clamp(22px, 3vw, 30px);
+  gap: 12px;
+  padding: clamp(20px, 2.2vw, 26px);
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -466,7 +479,7 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 13px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -871,7 +884,8 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: none;
 /* ---------------------------- Responsive -------------------------- */
 
 @media (max-width: 900px) {
-  .verdict { grid-template-columns: 1fr; }
+  /* Trop étroit pour deux colonnes : réglages puis résultat, empilés. */
+  .workbench { grid-template-columns: 1fr; gap: clamp(32px, 6vw, 48px); }
 }
 
 @media (max-width: 700px) {

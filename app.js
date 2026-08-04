@@ -201,7 +201,7 @@ function renderVerdict(rows) {
       <p class="eyebrow">Le meilleur choix pour cet usage</p>
       <div class="verdict__head">
         ${logo(best.op)}
-        <h2>${best.op.name} <span>${best.plan.name}</span></h2>
+        <h3>${best.op.name} <span>${best.plan.name}</span></h3>
       </div>
       <p class="verdict__price"><span class="amount">${euros(best.cost)}</span><span class="unit">par mois</span></p>
       <dl class="stats">
