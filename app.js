@@ -145,6 +145,7 @@ const PRESETS = [
 
 const usage = { tripsPerWeek: 6, avgDuration: 12 };
 const activeOperators = new Set(OPERATORS.map((o) => o.id));
+let sideOpen = false; // panneau « meilleure offre par opérateur » replié par défaut
 
 const els = {};
 
@@ -176,6 +177,12 @@ function logo(op) {
 }
 
 function renderVerdict(rows) {
+  // Le verdict est reconstruit à chaque réglage. On relit l'état d'ouverture
+  // directement dans le DOM avant de le remplacer : l'événement `toggle` est
+  // asynchrone et arriverait trop tard pour être fiable ici.
+  const prevSide = els.verdict.querySelector(".verdict__side");
+  if (prevSide) sideOpen = prevSide.open;
+
   if (!rows.length) {
     els.verdict.innerHTML = `
       <div class="empty">
@@ -220,26 +227,32 @@ function renderVerdict(rows) {
       }
     </div>
 
-    <div class="verdict__side">
-      <p class="eyebrow">Meilleure offre par opérateur</p>
-      <ul class="best-list">
-        ${perOperator
-          .map(
-            ({ op, row }) => `
-          <li class="best-item ${row.cost === cheapest ? "is-top" : ""}" style="--brand:${op.color}">
-            ${logo(op)}
-            <div class="best-item__id">
-              <span class="best-item__op">${op.name}</span>
-              <span class="best-item__plan">${row.plan.name}</span>
-            </div>
-            <span class="best-item__cost">${euros(row.cost)}</span>
-          </li>`
-          )
-          .join("")}
-      </ul>
-      <p class="verdict__hint">Écart entre le meilleur et le pire forfait du panel :
-        <strong>${euros(rows.at(-1).cost - best.cost)}</strong> par mois.</p>
-    </div>`;
+    <details class="verdict__side"${sideOpen ? " open" : ""}>
+      <summary class="verdict__toggle">
+        <span class="eyebrow">Meilleure offre par opérateur</span>
+        <span class="verdict__count">${perOperator.length}</span>
+        <span class="verdict__chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="verdict__panel">
+        <ul class="best-list">
+          ${perOperator
+            .map(
+              ({ op, row }) => `
+            <li class="best-item ${row.cost === cheapest ? "is-top" : ""}" style="--brand:${op.color}">
+              ${logo(op)}
+              <div class="best-item__id">
+                <span class="best-item__op">${op.name}</span>
+                <span class="best-item__plan">${row.plan.name}</span>
+              </div>
+              <span class="best-item__cost">${euros(row.cost)}</span>
+            </li>`
+            )
+            .join("")}
+        </ul>
+        <p class="verdict__hint">Écart entre le meilleur et le pire forfait du panel :
+          <strong>${euros(rows.at(-1).cost - best.cost)}</strong> par mois.</p>
+      </div>
+    </details>`;
 }
 
 function renderRanking(rows) {
