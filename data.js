@@ -16,7 +16,7 @@ const OPERATORS = [
     name: "Voi",
     file: "Voi",
     color: "#F26961",
-    updated: "21/07/2026",
+    updated: "12/08/2026",
     plans: [
       { id: "voi-payg", name: "À la minute", type: "payg", unlock: 0, rate: 0.29 },
       { id: "voi-30",  name: "Pass 30 min",  type: "pass", price: 2.99,  minutes: 30,  days: 1 },
@@ -31,7 +31,7 @@ const OPERATORS = [
     name: "Lime",
     file: "Lime",
     color: "#00DD00",
-    updated: "21/07/2026",
+    updated: "12/08/2026",
     plans: [
       { id: "lime-payg", name: "À la minute", type: "payg", unlock: 0, rate: 0.28 },
       { id: "lime-30",  name: "LimePass 30 min",  type: "pass", price: 3.99,  minutes: 30,  days: 1 },
@@ -58,7 +58,7 @@ const OPERATORS = [
     name: "Dott",
     file: "Dott",
     color: "#00A8E9",
-    updated: "21/07/2026",
+    updated: "12/08/2026",
     plans: [
       { id: "dott-payg", name: "À la minute", type: "payg", unlock: 1.0, rate: 0.35 },
       { id: "dott-30",  name: "Pass 30 min",  type: "pass", price: 3.99,  minutes: 30,  days: 1 },
